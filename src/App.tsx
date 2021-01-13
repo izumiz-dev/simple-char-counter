@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { TextField } from "@material-ui/core";
+import { ChangeEvent, useCallback, useState } from "react";
+import CSS from "csstype";
 
-function App() {
+const style: CSS.Properties = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
+export const App = () => {
+  const [text, setText] = useState("");
+  const inputText = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => setText(e.target.value),
+    []
+  );
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={style}>
+      <div style={{ fontWeight: "bold", fontSize: "4rem", padding: "1vh" }}>
+        {text.length || 0} chars
+      </div>
+      <TextField
+        style={{ width: "75vw" }}
+        id="outlined-basic"
+        label="Text"
+        variant="outlined"
+        multiline
+        onChange={inputText}
+      />
     </div>
   );
-}
-
-export default App;
+};
