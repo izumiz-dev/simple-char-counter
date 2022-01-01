@@ -8,6 +8,9 @@ import CheckIcon from "@material-ui/icons/Check";
 import { ChangeEvent, useCallback, useState } from "react";
 import Button from "@material-ui/core/Button";
 import { Pomodoro } from "./Pomodoro";
+import FormGroup from "@material-ui/core/FormGroup/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 
 export const App = () => {
   const [text, setText] = useState("");
@@ -159,6 +162,8 @@ export const App = () => {
           >
             謝罪の仕方をググる
           </Button>
+        </div>
+        <div style={{ display: "flex", alignItems: "center" }}>
           <Button
             style={{ margin: "4px" }}
             variant="outlined"
@@ -171,6 +176,19 @@ export const App = () => {
             startIcon={<OpenInNewIcon />}
           >
             Google翻訳で英語に
+          </Button>
+          <Button
+            style={{ margin: "4px" }}
+            variant="outlined"
+            color="primary"
+            size="small"
+            href={`https://www.deepl.com/translator#ja/en/${encodeURIComponent(
+              text
+            )}`}
+            target="_blank"
+            startIcon={<OpenInNewIcon />}
+          >
+            DeepL翻訳で英語に
           </Button>
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>
@@ -252,10 +270,9 @@ export const App = () => {
         </Button>
         {taskList.map((task, i) => {
           return (
-            <p>
-              <input type="checkbox" id={`${i}`} />
-              <label>{task}</label>
-            </p>
+            <FormGroup>
+              <FormControlLabel control={<Checkbox />} label={task} />
+            </FormGroup>
           );
         })}
       </div>
